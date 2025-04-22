@@ -13,7 +13,7 @@ This repository contains samples and tests that demonstrate how a host can contr
 ### Checkout the Firmware
 
 ```
-git clone --recurse-submodules https://github.com/LairdCP/Vela_IF820_Firmware.git
+git clone --recurse-submodules https://github.com/Ezurio/Vela_IF820_Firmware.git
 ```
 
 ### Python Samples and Tests
