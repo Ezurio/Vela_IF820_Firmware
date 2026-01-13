@@ -5,7 +5,7 @@ Python CLI for IF820 Firmware Upgrade
 
 pyinstaller command to produce a single executable file:
 
-pyinstaller --clean --console --noconfirm  --onefile --add-data "files/v1.4.16.16_int-ant/minidriver-20820A1-uart-patchram.hex:files/v1.4.16.16_int-ant/" --collect-all pyocd  --collect-all cmsis_pack_manager -p common_lib/libraries if820_flasher_cli.py
+pyinstaller --clean --console --noconfirm  --onefile --add-data "files/v1.4.18.18_int-ant/minidriver-20820A1-uart-patchram.hex:files/v1.4.18.18_int-ant/" --collect-all pyocd  --collect-all cmsis_pack_manager -p common_lib/libraries if820_flasher_cli.py
 
 """
 
@@ -19,7 +19,7 @@ from If820Board import If820Board
 from HciProgrammer import HciProgrammer
 
 LOG_MODULE_HCI_PORT = 'hci_port'
-VERSION = '2.0.0'
+VERSION = '2.1.0'
 
 
 def resource_path(relative_path):
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     print(f"IF820 Flasher CLI v{VERSION}")
 
     mini_driver = resource_path(
-        f'files{os.sep}v1.4.16.16_int-ant{os.sep}minidriver-20820A1-uart-patchram.hex')
+        f'files{os.sep}v1.4.18.18_int-ant{os.sep}minidriver-20820A1-uart-patchram.hex')
     com_port = args.connection
     firmware = args.file
     chip_erase = args.chip_erase
@@ -90,4 +90,4 @@ if __name__ == '__main__':
                 print(f"{i}: {board.probe.id}")
             choice = int(input("Enter the number of the board: "))
         board = boards[choice]
-        board.flash_firmware(mini_driver, firmware, chip_erase)
+        board.flash_firmware(minidriver=mini_driver, firmware=firmware, chip_erase=chip_erase, verify=True)
