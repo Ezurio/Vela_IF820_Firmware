@@ -140,6 +140,12 @@ EZ Port Close
 
     Call Method    ${board.p_uart}    close
 
+EZ Enable Protocol Auto Parse Mode
+    [Documentation]    Enable protocol auto parse mode on the specified board. (v1.4.18.18 firmware and later)
+    [Arguments]    ${board}
+
+    EZ Send    ${board}    ${lib_ez_serial_port.CMD_PROTOCOL_SET_PARSE_MODE}    mode=${128}
+
 UTF8 Bytes to String
     [Arguments]    ${utf8_bytes}
     ${byte_string}=    Convert To Bytes    ${utf8_bytes}
