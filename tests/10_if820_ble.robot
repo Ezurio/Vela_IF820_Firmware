@@ -79,6 +79,8 @@ Test Setup
     Find Boards and Settings
     Init Board    ${if820_board1}
     Init Board    ${if820_board2}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board2}
 
     ${PERIPHERAL_ADDRESS}=    IF820 Query Bluetooth Address    ${if820_board2}
     Set Global Variable    ${PERIPHERAL_ADDRESS}    ${PERIPHERAL_ADDRESS}

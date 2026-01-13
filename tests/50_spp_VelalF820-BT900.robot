@@ -33,6 +33,7 @@ Test Setup
     Init Board    ${if820_board1}
     DVK Probe Set IO Dir    ${if820_board1}    ${if820_board1.CYSPP}    ${0}
     EZ Factory Reset    ${if820_board1}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}
     Init BT900
 
 Test Teardown

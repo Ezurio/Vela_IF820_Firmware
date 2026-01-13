@@ -31,11 +31,13 @@ Test Setup
 
     Init Board    ${if820_board1}
     Init Board    ${if820_board2}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board2}
 
     DVK Probe Set IO Dir    ${if820_board1}    ${if820_board1.CP_ROLE}    ${0}
     DVK Probe Set IO Dir    ${if820_board1}    ${if820_board1.CYSPP}    ${0}
-    DVK Probe Set IO Dir    ${if820_board2}    ${if820_board1.CP_ROLE}    ${0}
-    DVK Probe Set IO Dir    ${if820_board2}    ${if820_board1.CYSPP}    ${0}
+    DVK Probe Set IO Dir    ${if820_board2}    ${if820_board2.CP_ROLE}    ${0}
+    DVK Probe Set IO Dir    ${if820_board2}    ${if820_board2.CYSPP}    ${0}
 
     ${fw_ver_central} =    Get DVK Probe Firmware Version    ${if820_board1}
     Log    ${fw_ver_central}

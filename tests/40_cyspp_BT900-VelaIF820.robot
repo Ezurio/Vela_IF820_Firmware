@@ -29,11 +29,14 @@ CYSPP BT900->IF820 Text Mode
 Test Setup
     Find Boards and Settings
     Init Board    ${if820_board1}
+    EZ Factory Reset    ${if820_board1}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}
     Init BT900
 
 Test Teardown
     Disconnect BT900
     De-Init BT900
+    EZ Factory Reset    ${if820_board1}
     De-Init Board    ${if820_board1}
 
 Disconnect BT900

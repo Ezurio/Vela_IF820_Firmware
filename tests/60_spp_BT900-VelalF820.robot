@@ -32,6 +32,7 @@ Test Setup
     Find Boards and Settings
     Init Board    ${if820_board1}
     EZ Factory Reset    ${if820_board1}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}
     Init BT900
     BT900 Enter Command Mode
 

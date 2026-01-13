@@ -6,14 +6,14 @@ Resource            common.robot
 
 Suite Setup         Suite Setup
 Suite Teardown      Suite Teardown
-Test Timeout        2 minutes
+Test Timeout        5 seconds
 
 Default Tags        vela if820
 
 
 *** Variables ***
-${REBOOT_COUNT}             5
-${BOOT_DELAY_SECONDS}       ${0.5}
+${REBOOT_COUNT}             3
+${BOOT_DELAY_SECONDS}       ${0.25}
 
 
 *** Test Cases ***
@@ -55,6 +55,7 @@ Get Uart Params
     END
 
 Factory Reset
+    [Timeout]    40 seconds
     Set Tags    PROD-682
     FOR    ${flow}    IN    @{UART_FLOW_TYPES}
         Setup Uarts    ${flow}
@@ -63,12 +64,19 @@ Factory Reset
             ...    ${lib_ez_serial_port.CMD_FACTORY_RESET}
             ...    ${api_mode}
             EZ Wait Event DUT1    ${lib_ez_serial_port.EVENT_SYSTEM_BOOT}
+            # Delay to allow flushing of boot events
+            Sleep    ${BOOT_DELAY_SECONDS}
+            # Re-apply UART params after factory reset
+            Set Uart Params    ${flow}
+            # Turn auto parse back on after reboot
+            EZ Enable Protocol Auto Parse Mode    ${if820_board1}
         END
         EZ Port Close    ${if820_board1}
     END
 
 Reboot
     Set Tags    PROD-678
+    [Timeout]    30 seconds
     FOR    ${flow}    IN    @{UART_FLOW_TYPES}
         Setup Uarts    ${flow}
         FOR    ${api_mode}    IN    @{API_MODES}
@@ -78,13 +86,13 @@ Reboot
     END
 
 Reboot Loop
+    [Timeout]    1 minute
     Set Tags    PROD-699
     FOR    ${api_mode}    IN    @{API_MODES}
         FOR    ${flow}    IN    @{UART_FLOW_TYPES}
             Setup Uarts    ${flow}
             FOR    ${counter}    IN RANGE    ${REBOOT_COUNT}
                 Reboot Command    ${api_mode}
-                Sleep    ${BOOT_DELAY_SECONDS}
             END
             EZ Port Close    ${if820_board1}
         END
@@ -95,6 +103,7 @@ Reboot Loop
 Suite Setup
     Find Boards and Settings
     Init Board    ${if820_board1}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}
 
 Suite Teardown
     De-Init Board    ${if820_board1}
@@ -134,3 +143,7 @@ Reboot Command
     ...    ${lib_ez_serial_port.CMD_REBOOT}
     ...    ${api_mode}
     EZ Wait Event DUT1    ${lib_ez_serial_port.EVENT_SYSTEM_BOOT}
+    # Delay to allow flushing of boot events
+    Sleep    ${BOOT_DELAY_SECONDS}
+    # Turn auto parse back on after reboot
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}

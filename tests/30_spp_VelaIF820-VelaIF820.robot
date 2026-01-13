@@ -30,8 +30,12 @@ Test Setup
     Find Boards and Settings
     Init Board    ${if820_board1}
     Init Board    ${if820_board2}
+    EZ Factory Reset    ${if820_board1}
+    EZ Factory Reset    ${if820_board2}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board1}
+    EZ Enable Protocol Auto Parse Mode    ${if820_board2}
     DVK Probe Set IO Dir    ${if820_board1}    ${if820_board1.CYSPP}    ${0}
-    DVK Probe Set IO Dir    ${if820_board2}    ${if820_board1.CYSPP}    ${0}
+    DVK Probe Set IO Dir    ${if820_board2}    ${if820_board2.CYSPP}    ${0}
 
 Test Teardown
     EZ Factory Reset    ${if820_board1}

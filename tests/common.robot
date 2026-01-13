@@ -285,6 +285,7 @@ EZ Factory Reset
 
     EZ Send    ${board}    ${lib_ez_serial_port.CMD_FACTORY_RESET}
     EZ Wait Event    ${board}    ${lib_ez_serial_port.EVENT_SYSTEM_BOOT}
+    Sleep    ${0.25}    # Delay to allow flushing of boot events
 
 BT900 IF820 SPP Send and Receive Data
     [Documentation]    Send and receive data over SPP between the BT900 and IF820.
