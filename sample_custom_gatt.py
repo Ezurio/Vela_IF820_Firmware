@@ -20,7 +20,6 @@ sys.path.append('./common_lib/libraries')
 import EzSerialPort as ez_port
 from If820Board import If820Board
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 ADV_MODE = ez_port.GapAdvertMode.NA.value
 ADV_TYPE = ez_port.GapAdvertType.UNDIRECTED_LOW_DUTY_CYCLE.value
 ADV_INTERVAL = 0x40
@@ -35,9 +34,9 @@ SCAN_FILTER_ACCEPT_ALL = ez_port.GapScanFilter.NA.value
 SCAN_INTERVAL = 0x100
 SCAN_WINDOW = 0x100
 # The following 4 values can be adjusted to see how it affects the power consumption of the peripheral.
-CONNECTION_INTERVAL = 400 # 400 * 1.25ms = 500ms
+CONNECTION_INTERVAL = 400  # 400 * 1.25ms = 500ms
 SLAVE_LATENCY = 3
-SUPERVISION_TIMEOUT = 500 # 500 * 10ms = 5s
+SUPERVISION_TIMEOUT = 500  # 500 * 10ms = 5s
 DATA_UPDATE_INTERVAL_SECONDS = 5
 PERIPHERAL_ADDRESS = None
 battery_level = 100
@@ -111,7 +110,7 @@ def scanner_thread():
 
     logging.debug('Stop scanning')
     quit_on_resp_err(if820_board_c.p_uart.send_and_wait(
-        if820_board_c.p_uart.CMD_GAP_STOP_SCAN, ez_port.EzSerialApiMode.BINARY.value)[0])
+        if820_board_c.p_uart.CMD_GAP_STOP_SCAN)[0])
     logging.debug('Wait for scan to stop...')
     quit_on_resp_err(if820_board_c.p_uart.wait_event(
         if820_board_c.p_uart.EVENT_GAP_SCAN_STATE_CHANGED)[0])
@@ -189,8 +188,6 @@ if __name__ == '__main__':
     # Init the modules
     boot_info_p = if820_board_p.open_and_init_board()
     boot_info_c = if820_board_c.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
     logging.info(f'Advertiser: {boot_info_p}')
     logging.info(f'Scanner: {boot_info_c}')
     PERIPHERAL_ADDRESS = boot_info_p.payload.address

@@ -20,7 +20,6 @@ sys.path.append('./common_lib/libraries')
 import EzSerialPort as ez_port
 from If820Board import If820Board
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 ADV_MODE = ez_port.GapAdvertMode.NA.value
 ADV_TYPE = ez_port.GapAdvertType.UNDIRECTED_HIGH_DUTY_CYCLE.value
 # The following two values can be adjusted to see how it affects the power consumption of the advertiser.
@@ -149,8 +148,6 @@ if __name__ == '__main__':
     # Init the modules
     boot_info_p = if820_board_p.open_and_init_board()
     boot_info_c = if820_board_c.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
     logging.info(f'Advertiser: {boot_info_p}')
     logging.info(f'Scanner: {boot_info_c}')
     PERIPHERAL_ADDRESS = boot_info_p.payload.address
@@ -179,7 +176,7 @@ if __name__ == '__main__':
             if820_board_p.p_uart.CMD_SET_PARAMS, ez_rsp)
 
     quit_on_resp_err(if820_board_p.p_uart.send_and_wait(
-        if820_board_p.p_uart.CMD_GAP_STOP_ADV, ez_port.EzSerialApiMode.BINARY.value)[0])
+        if820_board_p.p_uart.CMD_GAP_STOP_ADV)[0])
 
     # Start the scanner thread
     threading.Thread(target=scanner_thread,

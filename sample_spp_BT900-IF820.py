@@ -16,7 +16,6 @@ This sample requires the following hardware:
 -IF820 connected to PC via USB to act as a Bluetooth Peripheral
 """
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 SPP_DATA = "abcdefghijklmnop"
 OTA_LATENCY = 1
 
@@ -42,8 +41,6 @@ if __name__ == '__main__':
     # IF820
     if820_board_p = If820Board.get_board()
     if820_board_p.open_and_init_board()
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
-
     # bt900 query firmware version
     response = bt900_central.get_bt900_fw_ver()
     logging.info(f"BT900 firmware version = {response}")

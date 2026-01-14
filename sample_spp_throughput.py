@@ -29,7 +29,6 @@ sample from working:
 New firmware is available to fix these issues.
 """
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 UART_BITS_PER_BYTE = 10
 # UART baud rate to use for the test.
 # This baud rate is only set for this session and not saved to flash.
@@ -172,8 +171,6 @@ if __name__ == '__main__':
     if820_board_p = boards[1]
     if820_board_c.open_and_init_board()
     if820_board_p.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
 
     try:
         factory_reset(if820_board_c)
@@ -205,8 +202,6 @@ if __name__ == '__main__':
 
         if820_board_p.reconfig_puart(BAUD_RATE)
         if820_board_c.reconfig_puart(BAUD_RATE)
-        if820_board_p.p_uart.set_api_format(API_FORMAT)
-        if820_board_c.p_uart.set_api_format(API_FORMAT)
 
         # Wait for the module to change its UART params
         time.sleep(1)

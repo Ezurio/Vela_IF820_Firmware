@@ -8,7 +8,6 @@ sys.path.append('./common_lib/libraries')
 from If820Board import If820Board
 import EzSerialPort as ez_port
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 SYS_DEEP_SLEEP_LEVEL = 2
 HIBERNATE = False
 SLEEP_TIME = 60
@@ -50,7 +49,6 @@ if __name__ == '__main__':
 
     if820_board_p = If820Board.get_board()
     if820_board_p.open_and_init_board()
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
 
     # Disable sleep via gpio
     logging.info(f'GPIO Init')

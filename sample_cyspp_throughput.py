@@ -23,7 +23,6 @@ This sample requires the following hardware:
 -IF820 connected to PC via USB to act as a Bluetooth Central
 -The jumper on J3 CP_ROLE must be placed.
 """
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 
 UART_BITS_PER_BYTE = 10
 # UART baud rate to use for the test.
@@ -185,8 +184,6 @@ if __name__ == '__main__':
     if820_board_p = boards[1]
     if820_board_c.open_and_init_board()
     if820_board_p.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
 
     try:
         factory_reset(if820_board_c)
@@ -218,8 +215,6 @@ if __name__ == '__main__':
 
         if820_board_c.reconfig_puart(BAUD_RATE)
         if820_board_p.reconfig_puart(BAUD_RATE)
-        if820_board_c.p_uart.set_api_format(API_FORMAT)
-        if820_board_p.p_uart.set_api_format(API_FORMAT)
 
         # Wait for the module to change its UART params
         time.sleep(1)
@@ -280,7 +275,7 @@ if __name__ == '__main__':
                     logging.debug(f'Not looking for {received_addr}')
 
             ez_rsp = if820_board_c.p_uart.send_and_wait(
-                if820_board_c.p_uart.CMD_GAP_STOP_SCAN, ez_port.EzSerialApiMode.BINARY.value)
+                if820_board_c.p_uart.CMD_GAP_STOP_SCAN)
             If820Board.check_if820_response(
                 if820_board_c.p_uart.CMD_GAP_STOP_SCAN, ez_rsp)
 

@@ -14,7 +14,6 @@ from If820Board import If820Board
 import EzSerialPort as ez_port
 
 
-API_FORMAT = 0  # Text
 ADV_MODE = ez_port.GapAdvertMode.NA.value
 ADV_TYPE = ez_port.GapAdvertType.NON_CONNECTABLE_HIGH_DUTY_CYCLE.value
 ADV_INTERVAL = 0x20
@@ -54,7 +53,6 @@ if __name__ == '__main__':
     if820_board_p = If820Board.get_board()
     logging.info(f'Port Name: {if820_board_p.puart_port_name}')
     if820_board_p.open_and_init_board()
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
 
     logging.info('Configure advertiser...')
     quit_on_resp_err(if820_board_p.p_uart.send_and_wait(

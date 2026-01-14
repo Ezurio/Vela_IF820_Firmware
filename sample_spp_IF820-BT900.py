@@ -16,7 +16,6 @@ This sample requires the following hardware:
 -IF820 connected to PC via USB to act as a Bluetooth Central
 """
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 SPP_DATA = "abcdefghijklmnop"
 OTA_LATENCY = 1
 
@@ -41,7 +40,6 @@ if __name__ == '__main__':
     # IF820
     if820_board_c = If820Board.get_board()
     if820_board_c.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
 
     logging.info("IF820 Factory Reset")
     ez_rsp = if820_board_c.p_uart.send_and_wait(

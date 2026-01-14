@@ -9,7 +9,6 @@ from BT900SerialPort import BT900SerialPort
 from If820Board import If820Board
 import EzSerialPort as ez_port
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 BT900_ADV_FLAGS = bytes([0x02, 0x01, 0x06])
 BT900_ADV_NAME = bytes([0x0C, 0x09, 0x4C, 0x41, 0x49,
                        0x52, 0x44, 0x20, 0x42, 0x54, 0x39, 0x30, 0x30])
@@ -45,7 +44,6 @@ if __name__ == '__main__':
     # IF820
     if820_board_c = If820Board.get_board()
     if820_board_c.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
 
     # Put into central mode by setting CP_ROLE low
     logging.info("Put IF820 into central mode")
@@ -78,7 +76,7 @@ if __name__ == '__main__':
             logging.info(f'BT900 MAC address: {bt900_addr}')
 
     ez_rsp = if820_board_c.p_uart.send_and_wait(
-        if820_board_c.p_uart.CMD_GAP_STOP_SCAN, ez_port.EzSerialApiMode.BINARY.value)
+        if820_board_c.p_uart.CMD_GAP_STOP_SCAN)
     If820Board.check_if820_response(
         if820_board_c.p_uart.CMD_GAP_STOP_SCAN, ez_rsp)
     if820_board_c.p_uart.wait_event(

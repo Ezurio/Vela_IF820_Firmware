@@ -16,7 +16,6 @@ This sample requires the following hardware:
 -P27 is the "Connection" indicator.  On the Laird Module this is pin 33 of the module, attached to GPIO_21 of the pico probe.
 -The jumper on J3 CP_ROLE must be placed.
 """
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 SCAN_MODE_GENERAL_DISCOVERY = ez_port.GapScanMode.NA.value
 SCAN_FILTER_ACCEPT_ALL = ez_port.GapScanFilter.NA.value
 CYSPP_DATA = "abcdefghijklmnop"
@@ -93,8 +92,6 @@ if __name__ == '__main__':
     if820_board_p = boards[1]
     if820_board_c.open_and_init_board()
     if820_board_p.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
 
     factory_reset(if820_board_c)
     factory_reset(if820_board_p)
@@ -161,7 +158,7 @@ if __name__ == '__main__':
                 logging.debug(f'Not looking for {received_addr}')
 
         ez_rsp = if820_board_c.p_uart.send_and_wait(
-            if820_board_c.p_uart.CMD_GAP_STOP_SCAN, ez_port.EzSerialApiMode.BINARY.value)
+            if820_board_c.p_uart.CMD_GAP_STOP_SCAN)
         If820Board.check_if820_response(
             if820_board_c.p_uart.CMD_GAP_STOP_SCAN, ez_rsp)
 

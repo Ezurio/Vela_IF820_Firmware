@@ -15,7 +15,6 @@ This sample requires the following hardware:
 -IF820 connected to PC via USB to act as a Bluetooth Central
 """
 
-API_FORMAT = ez_port.EzSerialApiMode.TEXT.value
 SPP_DATA = "abcdefghijklmnop"
 OTA_LATENCY = 0.5
 
@@ -73,8 +72,6 @@ if __name__ == '__main__':
     if820_board_p = boards[1]
     if820_board_c.open_and_init_board()
     if820_board_p.open_and_init_board()
-    if820_board_c.p_uart.set_api_format(API_FORMAT)
-    if820_board_p.p_uart.set_api_format(API_FORMAT)
 
     factory_reset(if820_board_c)
     factory_reset(if820_board_p)
@@ -82,7 +79,7 @@ if __name__ == '__main__':
     # Query the peripheral to get is Bluetooth Address
     peripheral_bt_mac = None
     ez_rsp = if820_board_p.p_uart.send_and_wait(
-        if820_board_p.p_uart.CMD_GET_BT_ADDR, ez_port.EzSerialApiMode.BINARY.value)
+        if820_board_p.p_uart.CMD_GET_BT_ADDR)
     If820Board.check_if820_response(
         if820_board_p.p_uart.CMD_GET_BT_ADDR, ez_rsp)
     peripheral_bt_mac = ez_rsp[1].payload.address
