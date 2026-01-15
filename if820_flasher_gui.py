@@ -5,7 +5,7 @@ Python GUI for IF820 Firmware Upgrade
 
 pyinstaller command to produce a single executable file:
 
-pyinstaller --clean --windowed --noconfirm  --onefile --add-data "img/IF820_fw_upgrade_header.png:img" --add-data "files/v1.4.16.16_int-ant/minidriver-20820A1-uart-patchram.hex:files/v1.4.16.16_int-ant" --collect-all pyocd  --collect-all cmsis_pack_manager -p common_lib/libraries if820_flasher_gui.py
+pyinstaller --clean --windowed --noconfirm  --onefile --add-data "img/IF820_fw_upgrade_header.png:img" --add-data "files/v1.4.18.18_int-ant/minidriver-20820A1-uart-patchram.hex:files/v1.4.18.18_int-ant" --collect-all pyocd  --collect-all cmsis_pack_manager -p common_lib/libraries if820_flasher_gui.py
 
 """
 
@@ -22,7 +22,7 @@ from If820Board import If820Board
 LOG_MODULE_HCI_PORT = 'hci_port'
 PROGRAM_TITLE = 'Vela IF820 Firmware Upgrade Tool'
 LOGGING_FORMAT = '%(asctime)s | %(levelname)s | %(message)s'
-VERSION = '2.0.0'
+VERSION = '2.1.0'
 
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
@@ -42,7 +42,7 @@ class WxTextCtrlLogHandler(logging.Handler):
 
 
 HEADER_IMG = resource_path(f'img{os.sep}IF820_fw_upgrade_header.png')
-MINIDRIVER = resource_path(f'files{os.sep}v1.4.16.16_int-ant{os.sep}minidriver-20820A1-uart-patchram.hex')
+MINIDRIVER = resource_path(f'files{os.sep}v1.4.18.18_int-ant{os.sep}minidriver-20820A1-uart-patchram.hex')
 
 
 class Window(wx.Frame):
@@ -162,7 +162,7 @@ class Window(wx.Frame):
         """
         try:
             self.selected_board.flash_firmware(
-                MINIDRIVER, f'{self.picker_firmware.GetTextCtrl().GetValue()}', self.ch_chiperase.GetValue())
+                minidriver=MINIDRIVER, firmware=f'{self.picker_firmware.GetTextCtrl().GetValue()}', chip_erase=self.ch_chiperase.GetValue(), verify=True)
         except Exception as e:
             # Log any error
             logging.error(e)
