@@ -156,7 +156,7 @@ IF820 Flash Firmware
     [Arguments]    ${board}    ${mini_driver}    ${firmware_file}    ${chip_erase}=${False}
 
     De-Init Board    ${board}    ${False}
-    ${res}=    Call Method    ${board}    flash_firmware    ${mini_driver}    ${firmware_file}    ${chip_erase}
+    ${res}=    Call Method    ${board}    flash_firmware    minidriver=${mini_driver}    firmware=${firmware_file}    chip_erase=${chip_erase}    verify=True
 
 IF820 Query Firmware Version
     [Arguments]    ${board}
