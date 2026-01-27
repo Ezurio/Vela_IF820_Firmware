@@ -4,7 +4,7 @@ This repository contains samples and tests that demonstrate how a host can contr
 
 ## Prerequisites
 
-- Install Python 3.9 to 3.11. Python 3.12 is not supported.
+- Install Python 3.9 or later
 - One or two IF820 DVKs. The second DVK is only required for samples and tests requiring two DVKs.
 - One BT900 DVK - Only for samples or tests involving the BT900
 
