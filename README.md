@@ -16,6 +16,11 @@ This repository contains samples and tests that demonstrate how a host can contr
 git clone --recurse-submodules https://github.com/Ezurio/Vela_IF820_Firmware.git
 ```
 
+### Flash Firmware onto the IF820
+
+The firmware binaries can be found in the [files](files) directory.
+Use the [if820_flasher_cli](if820_flasher_cli.py) or [if820_flasher_gui](if820_flasher_gui.py) to flash the firmware onto the IF820.
+
 ### Python Samples and Tests
 
 Before running any samples or tests, be sure to install the Python dependencies:
